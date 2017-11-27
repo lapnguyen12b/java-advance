@@ -3,12 +3,14 @@
  */
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import model.Student;
 import util.ConnectionDB;
@@ -22,79 +24,40 @@ import util.SqlQuery;
  *
  */
 public class StudentDAO {
-	public void show() throws SQLException {
-	    Connection myConn = DriverManager.getConnection(ConnectionDB.dbURL);
-	    Statement stm = myConn.createStatement();
-	    ResultSet resultSet = stm.executeQuery(SqlQuery.SELECT);
-	    while (resultSet.next()) {
-	      System.out.print(resultSet.getString(SqlQuery.FIRST_COLUMN) + "  ");
-//	      System.out.print(resultSet.getString(SqlQuery.SECOND_COLUMN) + "  ");
-//	      System.out.print(resultSet.getString(SqlQuery.THIRD_COLUMN) + "  ");
-	      System.out.print(resultSet.getString(SqlQuery.FORTH_COLUMN) + " \n");
-	    }
-	  }
-	public void display() throws SQLException {
+	/**
+	 * Insert Student (account,firstName,lastName,email)
+	 * @param account,firstName,lastName,email
+	 * */
+	public boolean insertStudetn(Student student) throws SQLException {
 		Connection conn = DriverManager.getConnection(ConnectionDB.dbURL);
-		Statement stm = conn.createStatement();
-		ResultSet rs = stm.executeQuery(SqlQuery.PROC);
-		while (rs.next()) {
-			System.out.println(rs.getString(SqlQuery.FIRST_COLUMN)+" ");
-			System.out.println(rs.getString(SqlQuery.FORTH_COLUMN)+" ");
+		PreparedStatement prSt = conn.prepareStatement(SqlQuery.INSERT);
+		prSt.setString(1, student.getAccount());
+		prSt.setString(2, student.getFirstName());
+		prSt.setString(3, student.getLastName());
+		prSt.setString(4, student.getEmail());
+		try {
+			prSt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return true;
 	}
-	  public ResultSet getByAccount(Student student) throws SQLException {
-	    Connection myConn = DriverManager.getConnection(ConnectionDB.dbURL);
-	    PreparedStatement ps = myConn.prepareStatement(SqlQuery.FIND_BY_ACCOUNT);
-	    ps.setString(1, student.getFullName());
-	    ResultSet rs = ps.executeQuery();
-	    return rs;
-	  }
-
-	  /**
-	   * 
-	   * @author Minh Quang.
-	   * @date 2017-Oct-30
-	   * @param user
-	   *          is inserted data
-	   * @return update data
-	   * @throws SQLException
-	   *           exeption SQL
-	   */
-	  public boolean insert(Student student) throws ClassNotFoundException, SQLException {
-	    Connection myConn = DriverManager.getConnection(ConnectionDB.dbURL);
-	    PreparedStatement preparedStatement = myConn.prepareStatement(SqlQuery.INSERT);
-	    preparedStatement.setString(1, student.getFullName());
-	    preparedStatement.setString(4, student.getEmail());
-	    try {
-	      preparedStatement.executeUpdate();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	      return false;
-	    }
-	    return true;
-	  }
-
-	  /**
-	   * 
-	   * @author Minh Quang.
-	   * @date 2017-Oct-30
-	   * @param user
-	   *          is updated data
-	   * @return update data
-	   * @throws SQLException
-	   *           exeption SQL
-	   */
-	  public boolean update(Student student) throws SQLException, ClassNotFoundException {
-	    Connection myConn = DriverManager.getConnection(ConnectionDB.dbURL);
-	    PreparedStatement preparedStatement = myConn.prepareStatement(SqlQuery.UPDATE);
-	    preparedStatement.setString(1, student.getFullName());
-	    preparedStatement.setString(2, student.getEmail());
-	    try {
-	      preparedStatement.executeUpdate();
-	    } catch (Exception e) {
-	      e.printStackTrace();
-	      return false;
-	    }
-	    return true;
-	  }
+	/**
+	 * Update Email by Account
+	 * @param email
+	 * @param acount
+	 * */
+	public boolean updateStudent(Student student) throws SQLException{
+		Connection conn = DriverManager.getConnection(ConnectionDB.dbURL);
+		PreparedStatement prSt = conn.prepareStatement(SqlQuery.UPDATE);
+		prSt.setString(1, student.getEmail());
+		prSt.setString(2, student.getAccount());
+		try {
+			prSt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+		
+	}
 }

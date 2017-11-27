@@ -14,6 +14,14 @@ import bus.StudentBUS;
  *@time:11:37:39 AM
  *
  */
+//connection DB
+//create entity
+//create DB , select, insert, update,delete, getAll ,PROC
+//create SqlQuery.java
+//create DAO insert, update, delete,getAll
+//create BUS(2) call DAO(insert...)
+//create BUS(1) Scanner  call BUS(insert...)
+
 public class Main {
 
 	/**
@@ -28,7 +36,7 @@ public class Main {
 	 */
 	public static void main(String[] args) throws SQLException {
 		StudentBUS studentbus = new StudentBUS();
-		studentbus.getAllUsers();
+		studentbus.updateData();
 		
 	}
 

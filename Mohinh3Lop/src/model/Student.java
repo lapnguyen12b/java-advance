@@ -11,8 +11,10 @@ package model;
  *
  */
 public class Student {
-	public String fullName;
+	public String account;
 	public String email;
+	public String firstName;
+	public String lastName;
 	/**
 	 * 
 	 */
@@ -20,25 +22,33 @@ public class Student {
 		super();
 	}
 	/**
-	 * @param fullName
+	 * @param account
 	 * @param email
 	 */
-	public Student(String fullName, String email) {
+	/**
+	 * @param account
+	 * @param email
+	 * @param firstName
+	 * @param lastName
+	 */
+	public Student(String account, String email, String firstName, String lastName) {
 		super();
-		this.fullName = fullName;
+		this.account = account;
 		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	/**
-	 * @return the fullName
+	 * @return the account
 	 */
-	public String getFullName() {
-		return fullName;
+	public String getAccount() {
+		return account;
 	}
 	/**
-	 * @param fullName the fullName to set
+	 * @param account the account to set
 	 */
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setAccount(String account) {
+		this.account = account;
 	}
 	/**
 	 * @return the email
@@ -51,6 +61,30 @@ public class Student {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	
