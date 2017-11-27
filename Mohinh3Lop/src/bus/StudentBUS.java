@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import dao.StudentDAO;
-import dao.StudentDAO;
 import model.Student;
 
 /**
  *@description
- *@author: User
+ *@author: 
  *@date:Nov 27, 2017
  *@time:11:38:54 AM
  *
